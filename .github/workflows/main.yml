@@ -22,21 +22,6 @@ jobs:
    - name: Run Bandit Scan
      run: bandit -ll -ii -r . -f json -o bandit-report.json
 
-   - name: Upload Bandit Results to DefectDojo
-     if: always()
-     env:
-       DEFECTDOJO_API_URL: https://demo.defectdojo.org
-       DEFECTDOJO_API_KEY: 67458aa267b7465d6a739e5a8da093ec64969c19
-       DEFECTDOJO_PRODUCT_ID: 10
-     run: |
-       curl -X POST "$DEFECTDOJO_API_URL/api/v2/import-scan/" \
-       -H "Authorization: Token $DEFECTDOJO_API_KEY" \
-       -H "Content-Type: application/json" \
-       -F scan_type="Bandit Scan" \
-       -F product="$DEFECTDOJO_PRODUCT_ID" \
-       -F file=@bandit-report.json \
-       -F auto_create_context=true
-
    - name: Upload Artifact
      uses: actions/upload-artifact@v3
      if: always()

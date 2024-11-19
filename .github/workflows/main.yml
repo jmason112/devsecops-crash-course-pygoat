@@ -55,6 +55,8 @@ jobs:
 
    - name: Docker Scout Scan
      uses: docker/scout-action@v1.0.9
+     env:
+       DOCKER_SCOUT_CACHE_FORMAT: tar
      with:
        dockerhub-user: ${{ secrets.REPO_USER }}
        dockerhub-password: ${{ secrets.REPO_PWD }}

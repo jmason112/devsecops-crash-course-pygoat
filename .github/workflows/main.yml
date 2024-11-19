@@ -23,6 +23,7 @@ jobs:
      run: bandit -ll -ii -r . -f json -o bandit-report.json
 
    - name: Upload Bandit Results to DefectDojo
+     if: always()
      env:
        DEFECTDOJO_API_URL: https://demo.defectdojo.org
        DEFECTDOJO_API_KEY: 67458aa267b7465d6a739e5a8da093ec64969c19
